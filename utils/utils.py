@@ -24,6 +24,17 @@ def load_image(img_path, target_shape=None):
     return img
 
 
+def save_image(optimizing_img, name, cnt, dump_path):
+    out_img = optimizing_img.squeeze(axis=0).detach().numpy()
+    out_img = np.moveaxis(out_img, 0, 2)
+    out_img_name = f"{name}_{cnt}.png"
+
+    dump_img = np.copy(out_img)
+    dump_img += np.array(np.multiply(IMAGENET_MEAN, 255)).reshape((1, 1, 3))
+    dump_img = np.clip(dump_img, 0, 255).astype('uint8')
+    cv.imwrite(os.path.join(dump_path, out_img_name), dump_img[:, :, ::-1])
+
+
 def gram_matrix(x, should_normalize=True):
     (b, channels, height, width) = x.size()
     features = x.view(b, channels, width * height)
@@ -32,3 +43,4 @@ def gram_matrix(x, should_normalize=True):
     if should_normalize:
         gram /= channels * height * width
     return gram
+
