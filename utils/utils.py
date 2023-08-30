@@ -15,7 +15,7 @@ def load_image(img_path, target_shape=None):
 
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Lambda(lambda x: x.mul(255)),
+        # transforms.Lambda(lambda x: x.mul(255)),
         transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD)
     ])
 
@@ -30,8 +30,9 @@ def save_image(optimizing_img, name, cnt, dump_path):
     out_img_name = f"{name}_{cnt}.png"
 
     dump_img = np.copy(out_img)
+    dump_img *= np.array(np.multiply(IMAGENET_STD,255)).reshape((1,1,3))
     dump_img += np.array(np.multiply(IMAGENET_MEAN, 255)).reshape((1, 1, 3))
-    dump_img = np.clip(dump_img, 0, 255).astype('uint8')
+    dump_img = np.clip(dump_img, 0, 255).astype("uint8")
     cv.imwrite(os.path.join(dump_path, out_img_name), dump_img[:, :, ::-1])
 
 

@@ -51,9 +51,11 @@ def image_style_transfer():
     # cv.imshow("Style Image", style_img.squeeze)
 
     # Random noise image
-    gaussian_noise_img = np.random.normal(loc=0, scale=90., size=content_img.shape).astype(np.float32)
-    init_img = torch.from_numpy(gaussian_noise_img)
-    optimizing_img = init_img.clone().detach().requires_grad_(True)
+    # gaussian_noise_img = np.random.normal(loc=0, scale=90., size=content_img.shape).astype(np.float32)
+    # init_img = torch.from_numpy(gaussian_noise_img)
+    # optimizing_img = init_img.clone().detach().requires_grad_(True)
+
+    optimizing_img = content_img.clone().detach().requires_grad_(True)
 
     neural_net = vgg_nets.Vgg16().eval()
     content_feature_maps = neural_net(content_img)
@@ -68,16 +70,17 @@ def image_style_transfer():
     optimized_img_name = "NewImg"
     dump_path = "./data/results/"
 
+    
+    utils.save_image(optimizing_img, optimized_img_name, 0, dump_path)
+
     optimizer = Adam((optimizing_img,), lr=1e1)
     tuning_step = make_tuning_step(neural_net, optimizer, target_content, target_gram_matrices, content_weight, style_weight)
     for i in range(3000):
         total_loss, content_loss, style_loss = tuning_step(optimizing_img)
         with torch.no_grad():
             print(f'Adam | iteration: {i:03}, total loss={total_loss.item():12.4f}, content_loss={content_weight * content_loss.item():12.4f}, style loss={style_weight * style_loss.item():12.4f}')
-            if i==2999 or i==0 or ((i+1)%5 == 0):
+            if i==2999 or ((i+1)%50 == 0):
                 utils.save_image(optimizing_img, optimized_img_name, i, dump_path)
-    
-    plt.imshow(optimizing_img)
 
 
 image_style_transfer()
