@@ -1,22 +1,25 @@
 import cv2 as cv
 import numpy as np
 import os
+import torch
 
 from torchvision import transforms
 
-IMAGENET_MEAN = [0.485, 0.456, 0.406]
-IMAGENET_STD = [0.229, 0.224, 0.225]
+IMAGENET_MEAN_255 = [123.675, 116.28, 103.53]
+IMAGENET_STD_NEUTRAL = [1, 1, 1]
 
 def load_image(img_path, target_shape=None):
     if not os.path.exists(img_path):
         raise Exception(f'Path does not exist: {img_path}')
-    img = cv.imread(img_path)
-    img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+    img = cv.imread(img_path)[:, :, ::-1]
+
+    img = img.astype(np.float32)
+    img /= 255.0
 
     transform = transforms.Compose([
         transforms.ToTensor(),
-        # transforms.Lambda(lambda x: x.mul(255)),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD)
+        transforms.Lambda(lambda x: x.mul(255)),
+        transforms.Normalize(mean=IMAGENET_MEAN_255, std=IMAGENET_STD_NEUTRAL)
     ])
 
     img = transform(img).unsqueeze(0)
@@ -30,9 +33,11 @@ def save_image(optimizing_img, name, cnt, dump_path):
     out_img_name = f"{name}_{cnt}.png"
 
     dump_img = np.copy(out_img)
-    dump_img *= np.array(np.multiply(IMAGENET_STD,255)).reshape((1,1,3))
-    dump_img += np.array(np.multiply(IMAGENET_MEAN, 255)).reshape((1, 1, 3))
-    dump_img = np.clip(dump_img, 0, 255).astype("uint8")
+    dump_img += np.array(IMAGENET_MEAN_255).reshape((1, 1, 3))
+    dump_img = np.clip(dump_img, 0, 255).astype('uint8')
+    # dump_img *= np.array(np.multiply(IMAGENET_STD,255)).reshape((1,1,3))
+    # dump_img += np.array(np.multiply(IMAGENET_MEAN, 255)).reshape((1, 1, 3))
+    # dump_img = np.clip(dump_img, 0, 255).astype("uint8")
     cv.imwrite(os.path.join(dump_path, out_img_name), dump_img[:, :, ::-1])
 
 
@@ -45,3 +50,7 @@ def gram_matrix(x, should_normalize=True):
         gram /= channels * height * width
     return gram
 
+
+def total_variation(y):
+    return torch.sum(torch.abs(y[:, :, :, :-1] - y[:, :, :, 1:])) + \
+           torch.sum(torch.abs(y[:, :, :-1, :] - y[:, :, 1:, :]))
