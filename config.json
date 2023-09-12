@@ -1,0 +1,14 @@
+{
+    "content_img_name": "tubingen.png",
+    "style_img_name": "wave_crop.jpg",
+
+    "neural_net": "VGG19",
+
+    "content_weight": 1e5,
+    "style_weight": 3e4,
+    "tv_weight": 1e0,
+
+    "init_img": "random",
+
+    "optimizer": "LBFGS"
+}

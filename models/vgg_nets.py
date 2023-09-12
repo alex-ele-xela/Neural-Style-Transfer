@@ -6,7 +6,7 @@ from torchvision import models
 class Vgg16(torch.nn.Module):
     def __init__(self, requires_grad=False, show_progress=False):
         super().__init__()
-        vgg_pretrained_features = models.vgg16(progress=show_progress).features
+        vgg_pretrained_features = models.vgg16(weights=models.VGG16_Weights.DEFAULT, progress=show_progress).features
         self.layer_names = ['relu1_2', 'relu2_2', 'relu3_3', 'relu4_3']
         self.content_feature_maps_index = 1  # relu2_2
         self.style_feature_maps_indices = list(range(len(self.layer_names)))  # all layers used for style representation
@@ -48,7 +48,7 @@ class Vgg16(torch.nn.Module):
 class Vgg19(torch.nn.Module):
     def __init__(self, requires_grad=False, show_progress=False, use_relu=True):
         super().__init__()
-        vgg_pretrained_features = models.vgg19(progress=show_progress).features
+        vgg_pretrained_features = models.vgg19(weights=models.VGG19_Weights.DEFAULT, progress=show_progress).features
         if use_relu:  # use relu or as in original paper conv layers
             self.layer_names = ['relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'conv4_2', 'relu5_1']
             self.offset = 1

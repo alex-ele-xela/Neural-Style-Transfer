@@ -27,17 +27,14 @@ def load_image(img_path, target_shape=None):
     return img
 
 
-def save_image(optimizing_img, name, cnt, dump_path):
+def save_image(optimizing_img, cnt, dump_path):
     out_img = optimizing_img.squeeze(axis=0).detach().numpy()
     out_img = np.moveaxis(out_img, 0, 2)
-    out_img_name = f"{name}_{cnt}.png"
+    out_img_name = str(cnt).zfill(4) + ".png"
 
     dump_img = np.copy(out_img)
     dump_img += np.array(IMAGENET_MEAN_255).reshape((1, 1, 3))
     dump_img = np.clip(dump_img, 0, 255).astype('uint8')
-    # dump_img *= np.array(np.multiply(IMAGENET_STD,255)).reshape((1,1,3))
-    # dump_img += np.array(np.multiply(IMAGENET_MEAN, 255)).reshape((1, 1, 3))
-    # dump_img = np.clip(dump_img, 0, 255).astype("uint8")
     cv.imwrite(os.path.join(dump_path, out_img_name), dump_img[:, :, ::-1])
 
 
@@ -54,3 +51,15 @@ def gram_matrix(x, should_normalize=True):
 def total_variation(y):
     return torch.sum(torch.abs(y[:, :, :, :-1] - y[:, :, :, 1:])) + \
            torch.sum(torch.abs(y[:, :, :-1, :] - y[:, :, 1:, :]))
+
+
+def create_video(dump_path):
+    import moviepy.video.io.ImageSequenceClip as ISC
+
+    fps=25
+    image_files = [os.path.join(dump_path,img)
+                for img in os.listdir(dump_path)
+                if img.endswith(".png")]
+
+    clip = ISC.ImageSequenceClip(image_files, fps=fps)
+    clip.write_videofile(os.path.join(dump_path, 'out.mp4'), verbose=False, logger=None)
