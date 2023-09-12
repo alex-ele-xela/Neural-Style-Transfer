@@ -1,0 +1,102 @@
+Using config: {'content_img_name': 'lion.jpg', 'style_img_name': 'mosaic.jpg', 'neural_net': 'VGG19', 'content_weight': 100000.0, 'style_weight': 10000.0, 'tv_weight': 1.0, 'init_img': 'content', 'optimizer': 'LBFGS', 'content_img_path': 'data/content_images/lion.jpg', 'style_img_path': 'data/style_images/mosaic.jpg', 'dump_path': 'data/output_images/lion styled as mosaic/100000 10000 1'}
+
+Loaded images
+
+Initialized Optimizing image
+
+Generated feature maps
+
+Starting LBFGS Optimization
+
+LBFGS | iteration: 001, total loss=2413789970432.0000, content_loss=      0.0000, style loss=2413709280000.0000, tv loss=80641000.0000
+LBFGS | iteration: 002, total loss=2413789708288.0000, content_loss=      0.0000, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 003, total loss=2413789970432.0000, content_loss=      0.0000, style loss=2413709280000.0000, tv loss=80641000.0000
+LBFGS | iteration: 004, total loss=2413789970432.0000, content_loss=      0.0000, style loss=2413709280000.0000, tv loss=80641000.0000
+LBFGS | iteration: 005, total loss=2413789970432.0000, content_loss=      0.0000, style loss=2413709280000.0000, tv loss=80641000.0000
+LBFGS | iteration: 006, total loss=2413789708288.0000, content_loss=      0.0001, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 007, total loss=2413789708288.0000, content_loss=      0.0001, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 008, total loss=2413789708288.0000, content_loss=      0.0001, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 009, total loss=2413789708288.0000, content_loss=      0.0001, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 010, total loss=2413789708288.0000, content_loss=      0.0001, style loss=2413708960000.0000, tv loss=80641000.0000
+LBFGS | iteration: 011, total loss=2413633470464.0000, content_loss=    410.0402, style loss=2413552800000.0000, tv loss=80645944.0000
+LBFGS | iteration: 012, total loss=2412245942272.0000, content_loss=  39247.3459, style loss=2412165280000.0000, tv loss=80690448.0000
+LBFGS | iteration: 013, total loss=2405754732544.0000, content_loss= 999966.4307, style loss=2405672800000.0000, tv loss=80913632.0000
+LBFGS | iteration: 014, total loss=2158851391488.0000, content_loss=295780957.0312, style loss=2158424480000.0000, tv loss=131079752.0000
+LBFGS | iteration: 015, total loss=69302946365440.0000, content_loss=11489259375.0000, style loss=69290572800000.0000, tv loss=886611840.0000
+LBFGS | iteration: 016, total loss=1921059520512.0000, content_loss=2396587109.3750, style loss=1918307040000.0000, tv loss=355875520.0000
+LBFGS | iteration: 017, total loss=1535307546624.0000, content_loss=1532226562.5000, style loss=1533503680000.0000, tv loss=271546560.0000
+LBFGS | iteration: 018, total loss=67578256949248.0000, content_loss=21183953125.0000, style loss=67556126720000.0000, tv loss=942999680.0000
+LBFGS | iteration: 019, total loss=1532740370432.0000, content_loss=3723675390.6250, style loss=1528640800000.0000, tv loss=375851552.0000
+LBFGS | iteration: 020, total loss=1368237146112.0000, content_loss=2648440820.3125, style loss=1365262240000.0000, tv loss=326467616.0000
+LBFGS | iteration: 021, total loss=4029365354496.0000, content_loss=4687366015.6250, style loss=4024161600000.0000, tv loss=516338880.0000
+LBFGS | iteration: 022, total loss=1010895814656.0000, content_loss=4233283593.7500, style loss=1006290960000.0000, tv loss=371557408.0000
+LBFGS | iteration: 023, total loss=4036043472896.0000, content_loss=1289983105.4688, style loss=4034332480000.0000, tv loss=421128000.0000
+LBFGS | iteration: 024, total loss=972952895488.0000, content_loss=2629746679.6875, style loss=969990000000.0000, tv loss=333150080.0000
+LBFGS | iteration: 025, total loss=8163949543424.0000, content_loss=14756078125.0000, style loss=8148572160000.0000, tv loss=621425280.0000
+LBFGS | iteration: 026, total loss=622664482816.0000, content_loss=5742796093.7500, style loss=616537720000.0000, tv loss=383943200.0000
+LBFGS | iteration: 027, total loss=1150829068288.0000, content_loss=2518266015.6250, style loss=1147950800000.0000, tv loss=359862016.0000
+LBFGS | iteration: 028, total loss=478176772096.0000, content_loss=4891574609.3750, style loss=472921960000.0000, tv loss=363223040.0000
+LBFGS | iteration: 029, total loss=628052787200.0000, content_loss=7907885937.5000, style loss=619718200000.0000, tv loss=426674432.0000
+LBFGS | iteration: 030, total loss=367908388864.0000, content_loss=6340426562.5000, style loss=361185640000.0000, tv loss=382342688.0000
+LBFGS | iteration: 031, total loss=557930119168.0000, content_loss=3458106250.0000, style loss=554119200000.0000, tv loss=352804384.0000
+LBFGS | iteration: 032, total loss=300732350464.0000, content_loss=5293293359.3750, style loss=295070880000.0000, tv loss=368157504.0000
+LBFGS | iteration: 033, total loss=263464534016.0000, content_loss=6484313671.8750, style loss=256578220000.0000, tv loss=401997760.0000
+LBFGS | iteration: 034, total loss=855446716416.0000, content_loss=2391317187.5000, style loss=852706400000.0000, tv loss=349006848.0000
+LBFGS | iteration: 035, total loss=220563390464.0000, content_loss=5389010546.8750, style loss=214786140000.0000, tv loss=388235136.0000
+LBFGS | iteration: 036, total loss=292350459904.0000, content_loss=6484358984.3750, style loss=285484960000.0000, tv loss=381111360.0000
+LBFGS | iteration: 037, total loss=190494588928.0000, content_loss=6207622265.6250, style loss=183904980000.0000, tv loss=382000640.0000
+LBFGS | iteration: 038, total loss=170639949824.0000, content_loss=5446222656.2500, style loss=164795630000.0000, tv loss=398106112.0000
+LBFGS | iteration: 039, total loss=159725355008.0000, content_loss=6185008593.7500, style loss=153141570000.0000, tv loss=398766976.0000
+LBFGS | iteration: 040, total loss=419678322688.0000, content_loss=5983665234.3750, style loss=413238720000.0000, tv loss=455927488.0000
+LBFGS | iteration: 041, total loss=137719529472.0000, content_loss=6376295312.5000, style loss=130938710000.0000, tv loss=404524512.0000
+LBFGS | iteration: 042, total loss=238373027840.0000, content_loss=4703912500.0000, style loss=233249700000.0000, tv loss=419408896.0000
+LBFGS | iteration: 043, total loss=117595062272.0000, content_loss=5802014062.5000, style loss=111386950000.0000, tv loss=406097600.0000
+LBFGS | iteration: 044, total loss=123130798080.0000, content_loss=6740186718.7500, style loss=115985490000.0000, tv loss=405114976.0000
+LBFGS | iteration: 045, total loss=108124528640.0000, content_loss=6232742578.1250, style loss=101486350000.0000, tv loss=405436864.0000
+LBFGS | iteration: 046, total loss=115401629696.0000, content_loss=5570004687.5000, style loss=109438410000.0000, tv loss=393218752.0000
+LBFGS | iteration: 047, total loss=100273684480.0000, content_loss=5976944140.6250, style loss=93896750000.0000, tv loss=399992768.0000
+LBFGS | iteration: 048, total loss=99851132928.0000, content_loss=5729274218.7500, style loss=93706630000.0000, tv loss=415225920.0000
+LBFGS | iteration: 049, total loss=87242104832.0000, content_loss=5950964062.5000, style loss=80885240000.0000, tv loss=405899200.0000
+LBFGS | iteration: 050, total loss=116037681152.0000, content_loss=6443260546.8750, style loss=109153550000.0000, tv loss=440871552.0000
+LBFGS | iteration: 051, total loss=78167769088.0000, content_loss=6356642968.7500, style loss=71396575000.0000, tv loss=414556992.0000
+LBFGS | iteration: 052, total loss=183297441792.0000, content_loss=4657868750.0000, style loss=178231900000.0000, tv loss=407660672.0000
+LBFGS | iteration: 053, total loss=72775671808.0000, content_loss=6071210546.8750, style loss=66292295000.0000, tv loss=412162272.0000
+LBFGS | iteration: 054, total loss=74592862208.0000, content_loss=6103709375.0000, style loss=68086835000.0000, tv loss=402320384.0000
+LBFGS | iteration: 055, total loss=69875326976.0000, content_loss=6119477343.7500, style loss=63347835000.0000, tv loss=408019968.0000
+LBFGS | iteration: 056, total loss=88865939456.0000, content_loss=5830498437.5000, style loss=82609305000.0000, tv loss=426135328.0000
+LBFGS | iteration: 057, total loss=64292134912.0000, content_loss=6053462109.3750, style loss=57826505000.0000, tv loss=412167936.0000
+LBFGS | iteration: 058, total loss=73325010944.0000, content_loss=6436784375.0000, style loss=66447575000.0000, tv loss=440659808.0000
+LBFGS | iteration: 059, total loss=59180351488.0000, content_loss=6252217187.5000, style loss=52506675000.0000, tv loss=421461568.0000
+LBFGS | iteration: 060, total loss=80135643136.0000, content_loss=5567330468.7500, style loss=74151465000.0000, tv loss=416842816.0000
+LBFGS | iteration: 061, total loss=54839234560.0000, content_loss=6084029296.8750, style loss=48336240000.0000, tv loss=418964608.0000
+LBFGS | iteration: 062, total loss=53172379648.0000, content_loss=6360280078.1250, style loss=46397045000.0000, tv loss=415053024.0000
+LBFGS | iteration: 063, total loss=105567256576.0000, content_loss=5526218750.0000, style loss=99587170000.0000, tv loss=453873600.0000
+LBFGS | iteration: 064, total loss=48570896384.0000, content_loss=6127932812.5000, style loss=42021065000.0000, tv loss=421899072.0000
+LBFGS | iteration: 065, total loss=65984053248.0000, content_loss=6219136718.7500, style loss=59331460000.0000, tv loss=433456000.0000
+LBFGS | iteration: 066, total loss=47726993408.0000, content_loss=6258724609.3750, style loss=41044552500.0000, tv loss=423712992.0000
+LBFGS | iteration: 067, total loss=54795468800.0000, content_loss=5913039062.5000, style loss=48456495000.0000, tv loss=425936896.0000
+LBFGS | iteration: 068, total loss=45618266112.0000, content_loss=6154392968.7500, style loss=39039937500.0000, tv loss=423937216.0000
+LBFGS | iteration: 069, total loss=43824988160.0000, content_loss=6066321484.3750, style loss=37336912500.0000, tv loss=421756448.0000
+LBFGS | iteration: 070, total loss=52016484352.0000, content_loss=6616492187.5000, style loss=44956450000.0000, tv loss=443542848.0000
+LBFGS | iteration: 071, total loss=40195579904.0000, content_loss=6322938281.2500, style loss=33444490000.0000, tv loss=428151040.0000
+LBFGS | iteration: 072, total loss=42411167744.0000, content_loss=5868721484.3750, style loss=36116582500.0000, tv loss=425864384.0000
+LBFGS | iteration: 073, total loss=38636892160.0000, content_loss=6147217968.7500, style loss=32062740000.0000, tv loss=426934080.0000
+LBFGS | iteration: 074, total loss=36408852480.0000, content_loss=6203349609.3750, style loss=29776272500.0000, tv loss=429228288.0000
+LBFGS | iteration: 075, total loss=41866747904.0000, content_loss=6173704687.5000, style loss=35255990000.0000, tv loss=437054208.0000
+LBFGS | iteration: 076, total loss=35163000832.0000, content_loss=6284532031.2500, style loss=28447780000.0000, tv loss=430684832.0000
+LBFGS | iteration: 077, total loss=110066327552.0000, content_loss=5645801562.5000, style loss=103964700000.0000, tv loss=455830976.0000
+LBFGS | iteration: 078, total loss=33921951744.0000, content_loss=6229305859.3750, style loss=27260597500.0000, tv loss=432048544.0000
+LBFGS | iteration: 079, total loss=44746272768.0000, content_loss=6313680078.1250, style loss=38002197500.0000, tv loss=430395136.0000
+LBFGS | iteration: 080, total loss=33055381504.0000, content_loss=6264772265.6250, style loss=26359032500.0000, tv loss=431576960.0000
+LBFGS | iteration: 081, total loss=33436864512.0000, content_loss=6071267187.5000, style loss=26926845000.0000, tv loss=438751616.0000
+LBFGS | iteration: 082, total loss=32165898240.0000, content_loss=6177884765.6250, style loss=25553337500.0000, tv loss=434675168.0000
+LBFGS | iteration: 083, total loss=31286169600.0000, content_loss=6157797656.2500, style loss=24696132500.0000, tv loss=432241024.0000
+LBFGS | iteration: 084, total loss=54566719488.0000, content_loss=6745646093.7500, style loss=47359800000.0000, tv loss=461274432.0000
+LBFGS | iteration: 085, total loss=29874458624.0000, content_loss=6346234765.6250, style loss=23090952500.0000, tv loss=437271904.0000
+LBFGS | iteration: 086, total loss=41962233856.0000, content_loss=5737958203.1250, style loss=35795097500.0000, tv loss=429176864.0000
+LBFGS | iteration: 087, total loss=28806227968.0000, content_loss=6213471484.3750, style loss=22158170000.0000, tv loss=434587872.0000
+LBFGS | iteration: 088, total loss=28196521984.0000, content_loss=6184387109.3750, style loss=21577890000.0000, tv loss=434245888.0000
+LBFGS | iteration: 089, total loss=31494666240.0000, content_loss=6440556250.0000, style loss=24611217500.0000, tv loss=442892800.0000
+LBFGS | iteration: 090, total loss=27108544512.0000, content_loss=6307657031.2500, style loss=20364256250.0000, tv loss=436631424.0000
+LBFGS | iteration: 091, total loss=27055327232.0000, content_loss=6143582421.8750, style loss=20480353750.0000, tv loss=431389888.0000
+LBFGS | iteration: 092, total loss=39835471872.0000, content_loss=6409035546.8750, style loss=32966420000.0000, tv loss=460016256.0000
