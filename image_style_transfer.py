@@ -143,35 +143,35 @@ if __name__ == "__main__":
     config = json.load(open('config.json'))   
 
     # Use this part if you want to loop through all images
-    # content_img_names = os.listdir(content_img_dir)
-    # style_img_names = os.listdir(style_img_dir)
+    content_img_names = os.listdir(content_img_dir)
+    style_img_names = os.listdir(style_img_dir)
 
-    # for content_img_name in content_img_names:
-    #     config["content_img_path"] = os.path.join(content_img_dir, content_img_name)
+    for content_img_name in content_img_names:
+        config["content_img_path"] = os.path.join(content_img_dir, content_img_name)
 
-    #     for style_img_name in style_img_names:
-    #         config["style_img_path"] = os.path.join(style_img_dir, style_img_name)
+        for style_img_name in style_img_names:
+            config["style_img_path"] = os.path.join(style_img_dir, style_img_name)
 
-    #         output_dir_name = content_img_name.split(".")[0] + " styled as " + style_img_name.split(".")[0]
-    #         weight_dir_name = f'{int(config["content_weight"])} {int(config["style_weight"])} {int(config["tv_weight"])}'
-    #         dump_path = os.path.join(os.path.join(output_img_dir, output_dir_name), weight_dir_name)
-    #         os.makedirs(dump_path, exist_ok=True)
-    #         print("Made dir")
+            output_dir_name = content_img_name.split(".")[0] + " styled as " + style_img_name.split(".")[0]
+            weight_dir_name = f'{int(config["content_weight"])} {int(config["style_weight"])} {int(config["tv_weight"])}'
+            dump_path = os.path.join(os.path.join(output_img_dir, output_dir_name), weight_dir_name)
+            os.makedirs(dump_path, exist_ok=True)
+            print("Made dir")
 
-    #         config["dump_path"] = dump_path
+            config["dump_path"] = dump_path
 
-    #         image_style_transfer(config)
+            image_style_transfer(config)
 
     # Use this part if you want to use config.json file
-    config["content_img_path"] = os.path.join(content_img_dir, config["content_img_name"])
-    config["style_img_path"] = os.path.join(style_img_dir, config["style_img_name"])
+    # config["content_img_path"] = os.path.join(content_img_dir, config["content_img_name"])
+    # config["style_img_path"] = os.path.join(style_img_dir, config["style_img_name"])
 
-    output_dir_name = config["content_img_name"].split(".")[0] + " styled as " + config["style_img_name"].split(".")[0]
-    weight_dir_name = f'{int(config["content_weight"])} {int(config["style_weight"])} {int(config["tv_weight"])}'
-    dump_path = os.path.join(os.path.join(output_img_dir, output_dir_name), weight_dir_name)
-    os.makedirs(dump_path, exist_ok=True)
-    del output_dir_name, weight_dir_name
+    # output_dir_name = config["content_img_name"].split(".")[0] + " styled as " + config["style_img_name"].split(".")[0]
+    # weight_dir_name = f'{int(config["content_weight"])} {int(config["style_weight"])} {int(config["tv_weight"])}'
+    # dump_path = os.path.join(os.path.join(output_img_dir, output_dir_name), weight_dir_name)
+    # os.makedirs(dump_path, exist_ok=True)
+    # del output_dir_name, weight_dir_name
 
-    config["dump_path"] = dump_path
+    # config["dump_path"] = dump_path
 
-    image_style_transfer(config)
+    # image_style_transfer(config)
