@@ -77,7 +77,7 @@ def image_style_transfer(config):
     target_content = content_feature_maps[3].squeeze(axis=0)
     target_gram_matrices = [utils.gram_matrix(x) for x in style_feature_maps]
     
-    utils.save_image(optimizing_img, 0, dump_path)
+    utils.save_image(optimizing_img, 0, config["dump_path"])
 
     iter = {
         "Adam": 3000,
@@ -118,7 +118,7 @@ def image_style_transfer(config):
                 del text
 
                 if cnt%4 == 0:
-                    utils.save_image(optimizing_img, cnt, dump_path)
+                    utils.save_image(optimizing_img, cnt, config["dump_path"])
             cnt += 1
 
             return total_loss
@@ -133,14 +133,15 @@ def image_style_transfer(config):
     logger(log_file, "\nGenerated video clip")
 
 
-if __name__ == "__main__":
+
+def get_config(file) -> dict():
     default_resource_dir = os.path.join(os.path.dirname(__file__), 'data')
     content_img_dir = os.path.join(default_resource_dir, 'content_images')
     style_img_dir = os.path.join(default_resource_dir, 'style_images')
     output_img_dir = os.path.join(default_resource_dir, 'output_images')
 
     config = dict() 
-    config = json.load(open('config.json'))   
+    config = json.load(open(file))   
 
     # Use this part if you want to loop through all images
     # content_img_names = os.listdir(content_img_dir)
@@ -173,5 +174,11 @@ if __name__ == "__main__":
     del output_dir_name, weight_dir_name
 
     config["dump_path"] = dump_path
+
+    return config
+
+
+if __name__ == "__main__":
+    config = get_config('config.json')
 
     image_style_transfer(config)

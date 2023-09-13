@@ -57,9 +57,9 @@ def create_video(dump_path):
     import moviepy.video.io.ImageSequenceClip as ISC
 
     fps=25
-    image_files = [os.path.join(dump_path,img)
-                for img in os.listdir(dump_path)
-                if img.endswith(".png")]
+    images = [img for img in os.listdir(dump_path) if img.endswith(".png")]
+    images.sort()
+    image_files = [os.path.join(dump_path,img) for img in images]
 
     clip = ISC.ImageSequenceClip(image_files, fps=fps)
     clip.write_videofile(os.path.join(dump_path, 'out.mp4'), verbose=False, logger=None)
