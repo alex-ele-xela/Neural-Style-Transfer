@@ -3,7 +3,8 @@ import numpy as np
 import os
 import torch
 
-from torchvision import transforms
+from torchvision import transforms, datasets
+from torch.utils.data import DataLoader, Sampler
 
 IMAGENET_MEAN_255 = [123.675, 116.28, 103.53]
 IMAGENET_STD_NEUTRAL = [1, 1, 1]
@@ -63,3 +64,38 @@ def create_video(dump_path):
 
     clip = ISC.ImageSequenceClip(image_files, fps=fps)
     clip.write_videofile(os.path.join(dump_path, 'out.mp4'), verbose=False, logger=None)
+
+
+class SequentialSubsetSampler(Sampler):
+    def __init__(self, data_source, subset_size):
+        assert isinstance(data_source, datasets.ImageFolder)
+        self.data_source = data_source
+
+        if subset_size is None:
+            subset_size = len(data_source)
+        assert 0 < subset_size <= len(data_source), f'Subset size should be between (0, {len(data_source)}].'
+        self.subset_size = subset_size
+
+    def __iter__(self):
+        return iter(range(self.subset_size))
+
+    def __len__(self):
+        return self.subset_size
+
+
+def get_training_data_loader(training_config, should_normalize=True, is_255_range=False):
+    transform_list = [transforms.Resize(training_config['image_size']),
+                      transforms.CenterCrop(training_config['image_size']),
+                      transforms.ToTensor()]
+    if is_255_range:
+        transform_list.append(transforms.Lambda(lambda x: x.mul(255)))
+    if should_normalize:
+        transform_list.append(transforms.Normalize(mean=IMAGENET_MEAN_255, std=IMAGENET_STD_NEUTRAL) if is_255_range else transforms.Normalize(mean=IMAGENET_MEAN_1, std=IMAGENET_STD_1))
+    transform = transforms.Compose(transform_list)
+
+    train_dataset = datasets.ImageFolder(training_config['dataset_path'], transform)
+    sampler = SequentialSubsetSampler(train_dataset, training_config['subset_size'])
+    training_config['subset_size'] = len(sampler)  # update in case it was None
+    train_loader = DataLoader(train_dataset, batch_size=training_config['batch_size'], sampler=sampler, drop_last=True)
+    print(f'Using {len(train_loader)*training_config["batch_size"]*training_config["num_of_epochs"]} datapoints ({len(train_loader)*training_config["num_of_epochs"]} batches) (MS COCO images) for transformer network training.')
+    return train_loader

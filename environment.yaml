@@ -1,0 +1,12 @@
+name: neural_style_transfer
+channels:
+  - defaults
+  - pytorch
+dependencies:
+  - python>=3.10.13
+  - pip=23.2.1
+  - pytorch==2.0.1
+  - torchvision=0.15.2
+  - pip:
+    - numpy>=1.25.2
+    - opencv-python>=4.6.0.66
