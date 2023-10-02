@@ -1,16 +1,33 @@
+"""
+Contains VGG16 and VGG19 nets that output the feature maps from specific pre-defined layers relevant to the Nerual Style Transfer task
+"""
+
 from collections import namedtuple
 import torch
 from torchvision import models
 
 
 class Vgg16(torch.nn.Module):
+    """
+    Class to implement VGG16's CNN with Pre-trained weights and return output feature maps of of relevant layers
+
+    Args:
+        requires_grad (bool): Do the params require grad, i.e., if they are trainable
+        show_progress (bool): Should the progress of downloading VGG16 weights be shown
+    """
+
     def __init__(self, requires_grad=False, show_progress=False):
         super().__init__()
+
+        # download weights
         vgg_pretrained_features = models.vgg16(weights=models.VGG16_Weights.DEFAULT, progress=show_progress).features
+        
+        # naming relevant layers to extract feature maps from
         self.layer_names = ['relu1_2', 'relu2_2', 'relu3_3', 'relu4_3']
         self.content_feature_maps_index = 1  # relu2_2
-        self.style_feature_maps_indices = list(range(len(self.layer_names)))  # all layers used for style representation
+        self.style_feature_maps_indices = list(range(len(self.layer_names)))
 
+        # slicing into 4 slices to extract the relevant feature map output of each slice
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()
         self.slice3 = torch.nn.Sequential()
@@ -40,26 +57,42 @@ class Vgg16(torch.nn.Module):
         x = self.slice4(x)
         relu4_3 = x
 
+        # returning feature maps as numedetuple
         vgg_outputs = namedtuple("VggOutputs", self.layer_names)
         out = vgg_outputs(relu1_2, relu2_2, relu3_3, relu4_3)
         return out
 
 
 class Vgg19(torch.nn.Module):
+    """
+    Class to implement VGG19's CNN with Pre-trained weights and return output feature maps of of relevant layers
+
+    Args:
+        requires_grad (bool): Do the params require grad, i.e., if they are trainable
+        show_progress (bool): Should the progress of downloading VGG19 weights be shown
+        use_relu (bool): Use ouput of relu layer function or not (use output of conv if not)
+    """
+
     def __init__(self, requires_grad=False, show_progress=False, use_relu=True):
         super().__init__()
+
+        # download weights
         vgg_pretrained_features = models.vgg19(weights=models.VGG19_Weights.DEFAULT, progress=show_progress).features
-        if use_relu:  # use relu or as in original paper conv layers
+        
+        # naming relevant layers to extract feature maps from
+        if use_relu:
             self.layer_names = ['relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'conv4_2', 'relu5_1']
             self.offset = 1
         else:
             self.layer_names = ['conv1_1', 'conv2_1', 'conv3_1', 'conv4_1', 'conv4_2', 'conv5_1']
             self.offset = 0
         self.content_feature_maps_index = 4  # conv4_2
+        
         # all layers used for style representation except conv4_2
         self.style_feature_maps_indices = list(range(len(self.layer_names)))
         self.style_feature_maps_indices.remove(4)  # conv4_2
 
+        # slicing into 6 slices to extract the relevant feature map output of each slice
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()
         self.slice3 = torch.nn.Sequential()
@@ -96,6 +129,7 @@ class Vgg19(torch.nn.Module):
         x = self.slice6(x)
         layer5_1 = x
 
+        # returning feature maps as numedetuple
         vgg_outputs = namedtuple("VggOutputs", self.layer_names)
         out = vgg_outputs(layer1_1, layer2_1, layer3_1, layer4_1, conv4_2, layer5_1)
         return out
