@@ -41,10 +41,12 @@ Content Image | Style Image | Generated Image
 
 - The content images are available at **data/content_images**
 - The style images are available at **data/style_images**
-- All the generated examples along with videos are available at **data/output_images/\<content image> styled as \<style image>/\<content weight> \<style weight> \<tv weight>/**
+- All the generated examples along with logs and video are available at **data/output_images/\<content image> styled as \<style image>/\<content weight> \<style weight> \<tv weight>/**
 
 #### For example:
 Tubingen styled as Van Gogh Starry Night
 - Content Image: [data/content_images/tubingen.png](./data/content_images/tubingen.png)
 - Style Image: [data/style_images/vg_starry_night.jpg](./data/style_images/vg_starry_night.jpg)
-- Outputs: data/output_images/tubingen styled as vg_starry_night/100000 10000 1
+- Outputs: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201)
+- Log file: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1/log.txt](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/log.txt)
+- Video: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1/out.mp4](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/out.mp4)
