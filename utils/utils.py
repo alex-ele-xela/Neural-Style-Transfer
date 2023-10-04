@@ -68,7 +68,7 @@ def load_image(img_path):
     return img
 
 
-def save_image(optimizing_img, cnt, dump_path):
+def save_image(optimizing_img, name, dump_path):
     """
     Post-processes image to a readablee format and saves it as png image in the given path
 
@@ -83,7 +83,7 @@ def save_image(optimizing_img, cnt, dump_path):
     out_img = np.moveaxis(out_img, 0, 2)
 
     # creating output image name
-    out_img_name = str(cnt).zfill(4) + ".png"
+    out_img_name = name + ".png"
 
     # converting pixel vales into 0 to 255 range
     dump_img = np.copy(out_img)

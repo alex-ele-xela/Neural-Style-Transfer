@@ -129,7 +129,7 @@ def image_style_transfer(config):
     target_gram_matrices = [utils.gram_matrix(x) for x in style_feature_maps]
     
     # saving initialized optimizing image as iteration 0 of the optimization process
-    utils.save_image(optimizing_img, 0, config["dump_path"])
+    utils.save_image(optimizing_img, str(0).zfill(4), config["dump_path"])
 
     # setting max number of iterations for each optimizer
     iter = {
@@ -159,7 +159,7 @@ def image_style_transfer(config):
 
                 # saving image every 50 iterations
                 if i==2999 or ((i+1)%50 == 0):
-                    utils.save_image(optimizing_img, i+1, config["dump_path"])
+                    utils.save_image(optimizing_img, str(i+1).zfill(4), config["dump_path"])
 
 
     elif config["optimizer"] == "LBFGS":
@@ -195,7 +195,7 @@ def image_style_transfer(config):
 
                 # saving image every 4 iterations
                 if cnt%4 == 0:
-                    utils.save_image(optimizing_img, cnt, config["dump_path"])
+                    utils.save_image(optimizing_img, str(cnt).zfill(4), config["dump_path"])
             cnt += 1
 
             return total_loss
@@ -228,7 +228,7 @@ def get_config(file) -> dict:
     default_resource_dir = os.path.join(os.path.dirname(__file__), 'data')
     content_img_dir = os.path.join(default_resource_dir, 'content_images')
     style_img_dir = os.path.join(default_resource_dir, 'style_images')
-    output_img_dir = os.path.join(default_resource_dir, 'output_images')
+    output_img_dir = os.path.join(default_resource_dir, 'output_images', 'optimization')
 
     # loading json file
     config = dict() 
