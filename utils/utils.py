@@ -16,6 +16,21 @@ IMAGENET_STD_1 = np.array([0.229, 0.224, 0.225])
 IMAGENET_MEAN_255 = [123.675, 116.28, 103.53]
 IMAGENET_STD_NEUTRAL = [1, 1, 1]
 
+
+def logger(path, text):
+    """
+    Function to write text logs to the given file
+
+    Args:
+        path (string): log file location
+        text (string): log text to write to log file
+    """
+
+    with open(path, 'a') as f:
+        f.write(text)
+
+
+
 def load_image(img_path):
     """
     Loads image and pre-processes to return a tensor ready to be processed by the neural network
@@ -149,6 +164,18 @@ def create_video(dump_path):
 
 # Code for training Johnson neural net
 
+
+def prepare_img(img_path, batch_size=1):
+    img = load_image(img_path)  
+    img = img.repeat(batch_size, 1, 1, 1)
+
+    return img
+
+def batch_total_variation(img_batch):
+    batch_size = img_batch.shape[0]
+    return (torch.sum(torch.abs(img_batch[:, :, :, :-1] - img_batch[:, :, :, 1:])) +
+            torch.sum(torch.abs(img_batch[:, :, :-1, :] - img_batch[:, :, 1:, :]))) / batch_size
+
 class SequentialSubsetSampler(Sampler):
     def __init__(self, data_source, subset_size):
         assert isinstance(data_source, datasets.ImageFolder)
@@ -182,3 +209,33 @@ def get_training_data_loader(training_config, should_normalize=True, is_255_rang
     train_loader = DataLoader(train_dataset, batch_size=training_config['batch_size'], sampler=sampler, drop_last=True)
     print(f'Using {len(train_loader)*training_config["batch_size"]*training_config["num_of_epochs"]} datapoints ({len(train_loader)*training_config["num_of_epochs"]} batches) (MS COCO images) for transformer network training.')
     return train_loader
+
+
+def get_header(training_config):
+    header = ""
+    header += f'Learning the style of {training_config["style_img_name"]} style image.\n'
+    header += '*' * 80 + "\n"
+    header += f'Hyperparams: content_weight={training_config["content_weight"]}, style_weight={training_config["style_weight"]} and tv_weight={training_config["tv_weight"]} \n'
+    header += '*' * 80 + "\n"
+
+    if training_config["console_log_freq"]:
+        header += f'Logging to console every {training_config["console_log_freq"]} batches. \n'
+    else:
+        header += f'Console logging disabled. Change console_log_freq if you want to use it. \n'
+
+    if training_config["checkpoint_freq"]:
+        header += f'Saving checkpoint models every {training_config["checkpoint_freq"]} batches. \n'
+    else:
+        header += f'Checkpoint models saving disabled. \n'
+    header += '*' * 80 +"\n"
+
+
+def get_training_metadata(training_config):
+    num_of_datapoints = training_config['subset_size'] * training_config['num_of_epochs']
+    training_metadata = {
+        "content_weight": training_config['content_weight'],
+        "style_weight": training_config['style_weight'],
+        "tv_weight": training_config['tv_weight'],
+        "num_of_datapoints": num_of_datapoints
+    }
+    return training_metadata

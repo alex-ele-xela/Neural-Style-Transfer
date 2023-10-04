@@ -5,11 +5,11 @@
 
 ## About
 
-This project aims explore the domain of **Neural Style Transfer** by recreating the work of [Gatys et al., 2015](https://arxiv.org/abs/1508.06576)
+This project aims to explore the domain of **Neural Style Transfer** by recreating the work of [Gatys et al., 2015](https://arxiv.org/abs/1508.06576)
 
 ### WIP
 
-Creating a neural network to convert the style of an image to a pre-defined style basede on the work of [Johnson et al., 2016](https://arxiv.org/abs/1603.08155)
+Creating a neural network to convert the style of an image to a pre-defined style based on the work of [Johnson et al., 2016](https://arxiv.org/abs/1603.08155)
 
 ## Collaborators
 

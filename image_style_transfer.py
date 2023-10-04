@@ -86,18 +86,6 @@ def make_tuning_step(neural_net, optimizer, target_content, target_gram_matrices
     return tuning_step
 
 
-def logger(path, text):
-    """
-    Function to write text logs to the given file
-
-    Args:
-        path (string): log file location
-        text (string): log text to write to log file
-    """
-
-    with open(path, 'a') as f:
-        f.write(text)
-
 
 def image_style_transfer(config):
     """
@@ -109,12 +97,12 @@ def image_style_transfer(config):
 
     # creating the log file in the dump path
     log_file = os.path.join(config["dump_path"], "log.txt")
-    logger(log_file, f"Using config: {str(config)}\n\n")
+    utils.logger(log_file, f"Using config: {str(config)}\n\n")
 
     # loading the content and style images
     content_img = utils.load_image(config["content_img_path"])
     style_img = utils.load_image(config["style_img_path"])
-    logger(log_file, "Loaded images\n\n")
+    utils.logger(log_file, "Loaded images\n\n")
 
     # initializing the optimizing image as an image of random noise or the content image, according to the given configuration
     if config["init_img"] == "random":
@@ -123,7 +111,7 @@ def image_style_transfer(config):
         optimizing_img = init_img.clone().detach().requires_grad_(True)
     elif config["init_img"] == "content":
         optimizing_img = content_img.clone().detach().requires_grad_(True)
-    logger(log_file, "Initialized Optimizing image\n\n")
+    utils.logger(log_file, "Initialized Optimizing image\n\n")
 
     # initalizing the custom trained CNN as per the given configuration and setting it to eval mode to prevent gradient calculation and updation to weights
     if config["neural_net"] == "VGG19":
@@ -134,7 +122,7 @@ def image_style_transfer(config):
     # passing the content and style image through the neural net and saving the feature maps
     content_feature_maps = neural_net(content_img)
     style_feature_maps = neural_net(style_img)
-    logger(log_file, "Generated feature maps\n\n")
+    utils.logger(log_file, "Generated feature maps\n\n")
     
     # saving the relevant content feature map and style gram matrices
     target_content = content_feature_maps[3].squeeze(axis=0)
@@ -151,7 +139,7 @@ def image_style_transfer(config):
 
     # performing optimization using the optimizer specified in the configuration
     if config["optimizer"] == "Adam":
-        logger(log_file, "Starting Adam Optimization\n\n")
+        utils.logger(log_file, "Starting Adam Optimization\n\n")
 
         # initializing the optimizer
         optimizer = Adam((optimizing_img,), lr=1e1)
@@ -167,7 +155,7 @@ def image_style_transfer(config):
             with torch.no_grad():
                 text = f'Adam | iteration: {i:03}, total loss={total_loss.item():12.4f}, content_loss={config["content_weight"] * content_loss.item():12.4f}, style loss={config["style_weight"] * style_loss.item():12.4f}, tv loss={config["tv_weight"] * tv_loss.item():12.4f}'
                 print(text)
-                logger(log_file, text+"\n")
+                utils.logger(log_file, text+"\n")
 
                 # saving image every 50 iterations
                 if i==2999 or ((i+1)%50 == 0):
@@ -175,7 +163,7 @@ def image_style_transfer(config):
 
 
     elif config["optimizer"] == "LBFGS":
-        logger(log_file, "Starting LBFGS Optimization\n\n")
+        utils.logger(log_file, "Starting LBFGS Optimization\n\n")
 
         # initializing the optimizer
         optimizer = LBFGS((optimizing_img,), max_iter=iter["LBFGS"], tolerance_grad=-1, line_search_fn='strong_wolfe')
@@ -202,7 +190,7 @@ def image_style_transfer(config):
             with torch.no_grad():
                 text = f'LBFGS | iteration: {cnt:03}, total loss={total_loss.item():12.4f}, content_loss={config["content_weight"] * content_loss.item():12.4f}, style loss={config["style_weight"] * style_loss.item():12.4f}, tv loss={config["tv_weight"] * tv_loss.item():12.4f}'
                 print(text)
-                logger(log_file, text+"\n")
+                utils.logger(log_file, text+"\n")
                 del text
 
                 # saving image every 4 iterations
@@ -222,8 +210,7 @@ def image_style_transfer(config):
     
     # creaeting video of the optimizing images
     utils.create_video(config["dump_path"])
-    logger(log_file, "\nGenerated video clip")
-
+    utils.logger(log_file, "\nGenerated video clip")
 
 
 def get_config(file) -> dict:
@@ -245,31 +232,7 @@ def get_config(file) -> dict:
 
     # loading json file
     config = dict() 
-    config = json.load(open(file))   
-
-    # Use this part if you want to loop through all images
-    ###############################################################################################################
-    # content_img_names = os.listdir(content_img_dir)
-    # style_img_names = os.listdir(style_img_dir)
-
-    # for content_img_name in content_img_names:
-    #     config["content_img_path"] = os.path.join(content_img_dir, content_img_name)
-
-    #     for style_img_name in style_img_names:
-    #         config["style_img_path"] = os.path.join(style_img_dir, style_img_name)
-
-    #         output_dir_name = content_img_name.split(".")[0] + " styled as " + style_img_name.split(".")[0]
-    #         weight_dir_name = f'{int(config["content_weight"])} {int(config["style_weight"])} {int(config["tv_weight"])}'
-    #         dump_path = os.path.join(os.path.join(output_img_dir, output_dir_name), weight_dir_name)
-    #         os.makedirs(dump_path, exist_ok=True)
-    #         print("Made dir")
-
-    #         config["dump_path"] = dump_path
-
-    #         image_style_transfer(config)
-    ###############################################################################################################
-
-    # Use this part if you want to use config.json file
+    config = json.load(open(file))
 
     # setting location of content and style images
     config["content_img_path"] = os.path.join(content_img_dir, config["content_img_name"])
@@ -287,7 +250,8 @@ def get_config(file) -> dict:
     return config
 
 
+
 if __name__ == "__main__":
-    config = get_config('config.json')
+    config = get_config('image_style_transfer_config.json')
 
     image_style_transfer(config)

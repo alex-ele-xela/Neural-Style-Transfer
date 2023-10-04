@@ -1,0 +1,16 @@
+{
+    "style_img_name": "picasso_weeping_woman.jpg",
+
+    "content_weight": 1e5,
+    "style_weight": 1e3,
+    "tv_weight": 1e0,
+
+    "num_of_epochs": 2,
+    "subset_size": 4000,
+
+    "image_size": 256,
+    "batch_size": 4,
+
+    "console_log_freq": 10,
+    "checkpoint_freq": 100
+}
