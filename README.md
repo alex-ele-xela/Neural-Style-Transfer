@@ -29,24 +29,24 @@ The following images are generated using the Style Transfer optimization, with *
 
 Content Image | Style Image | Generated Image
 ---|---|---
-![tubingen](./data/content_images/tubingen.png "Tubingen")|![Starry Night](./data/style_images/vg_starry_night.jpg "Van Gogh Starry Night")|![Output](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/0500.png "Tubingen styled as Starry Night")
+![tubingen](./data/content_images/tubingen.png "Tubingen")|![Starry Night](./data/style_images/vg_starry_night.jpg "Van Gogh Starry Night")|![Output](./data/output_images/optimization/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/0500.png "Tubingen styled as Starry Night")
 ![tubingen](./data/content_images/tubingen.png "Tubingen")|![Weeping Woman](./data/style_images/picasso_weeping_woman.jpg "Weeping Woman")|![Output](./data/output_images/tubingen%20styled%20as%20picasso_weeping_woman/100000%2010000%201/0500.png "Tubingen styled as Weeping Woman")
-![tubingen](./data/content_images/tubingen.png "Tubingen")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/tubingen%20styled%20as%20mosaic/100000%2010000%201/0500.png "Tubingen styled as Mosaic")
-![Mona Lisa](./data/content_images/mona_lisa.jpeg "Mona Lisa")|![Starry Night](./data/style_images/vg_starry_night.jpg "Van Gogh Starry Night")|![Output](./data/output_images/mona_lisa%20styled%20as%20vg_starry_night/100000%2010000%201/0500.png "Mona Lisa styled as Starry Night")
+![tubingen](./data/content_images/tubingen.png "Tubingen")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/optimization/tubingen%20styled%20as%20mosaic/100000%2010000%201/0500.png "Tubingen styled as Mosaic")
+![Mona Lisa](./data/content_images/mona_lisa.jpeg "Mona Lisa")|![Starry Night](./data/style_images/vg_starry_night.jpg "Van Gogh Starry Night")|![Output](./data/output_images/optimization/ona_lisa%20styled%20as%20vg_starry_night/100000%2010000%201/0500.png "Mona Lisa styled as Starry Night")
 ![Mona Lisa](./data/content_images/mona_lisa.jpeg "Mona Lisa")|![Weeping Woman](./data/style_images/picasso_weeping_woman.jpg "Weeping Woman")|![Output](./data/output_images/mona_lisa%20styled%20as%20picasso_weeping_woman/100000%2010000%201/0500.png "Mona Lisa styled as Weeping Woman")
-![Mona Lisa](./data/content_images/mona_lisa.jpeg "Mona Lisa")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/mona_lisa%20styled%20as%20mosaic/100000%2010000%201/0500.png "Mona Lisa styled as Mosaic")
-![Lion](./data/content_images/lion.jpg "Lion")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/lion%20styled%20as%20mosaic/100000%2010000%201/0500.png "Lion styled as Mosaic")
+![Mona Lisa](./data/content_images/mona_lisa.jpeg "Mona Lisa")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/optimization/mona_lisa%20styled%20as%20mosaic/100000%2010000%201/0500.png "Mona Lisa styled as Mosaic")
+![Lion](./data/content_images/lion.jpg "Lion")|![Mosaic](./data/style_images/mosaic.jpg "Mosaic")|![Output](./data/output_images/optimization/lion%20styled%20as%20mosaic/100000%2010000%201/0500.png "Lion styled as Mosaic")
 
 ### How to access all examples
 
 - The content images are available at **data/content_images**
 - The style images are available at **data/style_images**
-- All the generated examples along with logs and video are available at **data/output_images/\<content image> styled as \<style image>/\<content weight> \<style weight> \<tv weight>/**
+- All the generated examples along with logs and video are available at **data/output_images/optimization/\<content image> styled as \<style image>/\<content weight> \<style weight> \<tv weight>/**
 
 #### For example:
 Tubingen styled as Van Gogh Starry Night
 - Content Image: [data/content_images/tubingen.png](./data/content_images/tubingen.png)
 - Style Image: [data/style_images/vg_starry_night.jpg](./data/style_images/vg_starry_night.jpg)
-- Outputs: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201)
-- Log file: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1/log.txt](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/log.txt)
-- Video: [data/output_images/tubingen styled as vg_starry_night/100000 10000 1/out.mp4](./data/output_images/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/out.mp4)
+- Outputs: [data/output_images/optimization/tubingen styled as vg_starry_night/100000 10000 1](./data/output_images/optimization/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201)
+- Log file: [data/output_images/optimization/tubingen styled as vg_starry_night/100000 10000 1/log.txt](./data/output_images/optimization/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/log.txt)
+- Video: [data/output_images/optimization/tubingen styled as vg_starry_night/100000 10000 1/out.mp4](./data/output_images/optimization/tubingen%20styled%20as%20vg_starry_night/100000%2010000%201/out.mp4)
