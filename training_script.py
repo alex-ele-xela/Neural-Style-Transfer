@@ -99,26 +99,26 @@ def train(training_config):
                 training_state = utils.get_training_metadata(training_config)
                 training_state["state_dict"] = transformer_net.state_dict()
                 training_state["optimizer_state"] = optimizer.state_dict()
-                ckpt_model_name = f"ckpt_style_{training_config['style_img_name'].split('.')[0]}_cw_{str(training_config['content_weight'])}_sw_{str(training_config['style_weight'])}_tw_{str(training_config['tv_weight'])}_epoch_{epoch}_batch_{batch_id}.pth"
+                ckpt_model_name = f"ckpt_{training_config['style_img_name'].split('.')[0]}_{str(training_config['content_weight'])}_{str(training_config['style_weight'])}_{str(training_config['tv_weight'])}_epoch{epoch+1}_batch{batch_id+1}.pth"
                 torch.save(training_state, os.path.join(training_config['checkpoints_path'], ckpt_model_name))
 
     # saving final model with additional metadata
     training_state = utils.get_training_metadata(training_config)
     training_state["state_dict"] = transformer_net.state_dict()
     training_state["optimizer_state"] = optimizer.state_dict()
-    model_name = f"{training_config['style_img_name'].split('.')[0]}_datapoints_{training_state['num_of_datapoints']}_cw_{str(training_config['content_weight'])}_sw_{str(training_config['style_weight'])}_tw_{str(training_config['tv_weight'])}.pth"
+    model_name = f"{training_config['style_img_name'].split('.')[0]}_{training_state['num_of_datapoints']}_{str(training_config['content_weight'])}_{str(training_config['style_weight'])}_{str(training_config['tv_weight'])}.pth"
     torch.save(training_state, os.path.join(training_config['model_binaries_path'], model_name))
 
 
 def get_config(file) -> dict:
     """
-    Function to pull Style Transfer configuration from the json file
+    Function to pull Training configuration from the json file
 
     Args:
         file (string): json configuration  file path
 
     Returns:
-        dict: dictionary containing all required configuration to perform the Neural style transfer task
+        dict: dictionary containing all required configuration to train the neural network
     """
 
     # setting important directory locations

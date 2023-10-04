@@ -64,42 +64,6 @@ def get_config(file) -> dict:
 
 
 if __name__ == "__main__":
-    #
-    # Fixed args - don't change these unless you have a good reason
-    #
-    content_images_path = os.path.join(os.path.dirname(__file__), 'data', 'content-images')
-    output_images_path = os.path.join(os.path.dirname(__file__), 'data', 'output-images')
-    model_binaries_path = os.path.join(os.path.dirname(__file__), 'models', 'binaries')
+    styling_config = get_config('pre_trained_style_transfer_config.json')
 
-    assert utils.dir_contains_only_models(model_binaries_path), f'Model directory should contain only model binaries.'
-    os.makedirs(output_images_path, exist_ok=True)
-
-    #
-    # Modifiable args - feel free to play with these
-    #
-    parser = argparse.ArgumentParser()
-    # Put image name or directory containing images (if you'd like to do a batch stylization on all those images)
-    parser.add_argument("--content_input", type=str, help="Content image(s) to stylize", default='taj_mahal.jpg')
-    parser.add_argument("--batch_size", type=int, help="Batch size used only if you set content_input to a directory", default=5)
-    parser.add_argument("--img_width", type=int, help="Resize content image to this width", default=500)
-    parser.add_argument("--model_name", type=str, help="Model binary to use for stylization", default='mosaic_4e5_e2.pth')
-
-    # Less frequently used arguments
-    parser.add_argument("--should_not_display", action='store_false', help="Should display the stylized result")
-    parser.add_argument("--verbose", action='store_true', help="Print model metadata (how the model was trained) and where the resulting stylized image was saved")
-    parser.add_argument("--redirected_output", type=str, help="Overwrite default output dir. Useful when this project is used as a submodule", default=None)
-    args = parser.parse_args()
-
-    # if redirected output is not set when doing batch stylization set to default image output location
-    if os.path.isdir(args.content_input) and args.redirected_output is None:
-        args.redirected_output = output_images_path
-
-    # Wrapping inference configuration into a dictionary
-    styling_config = dict()
-    for arg in vars(args):
-        styling_config[arg] = getattr(args, arg)
-    styling_config['content_images_path'] = content_images_path
-    styling_config['output_images_path'] = output_images_path
-    styling_config['model_binaries_path'] = model_binaries_path
-
-    stylize_static_image(styling_config)
+    stylize_image(styling_config)

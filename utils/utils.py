@@ -229,6 +229,8 @@ def get_header(training_config):
         header += f'Checkpoint models saving disabled. \n'
     header += '*' * 80 +"\n"
 
+    return header
+
 
 def get_training_metadata(training_config):
     num_of_datapoints = training_config['subset_size'] * training_config['num_of_epochs']
