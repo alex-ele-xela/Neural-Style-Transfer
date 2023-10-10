@@ -48,7 +48,7 @@ def load_image(img_path):
     if not os.path.exists(img_path):
         raise Exception(f'Path does not exist: {img_path}')
     
-    # read image in
+    # read image
     img = cv.imread(img_path)[:, :, ::-1]
 
     # convert image data type to float and normalize to range [0,1]
@@ -70,7 +70,7 @@ def load_image(img_path):
 
 def save_image(optimizing_img, name, dump_path):
     """
-    Post-processes image to a readablee format and saves it as png image in the given path
+    Post-processes image to a readable format and saves it as png image in the given path
 
     Args:
         optimizing_img (Tensor): image being modified using the neural nets and optimization, which is to be saved

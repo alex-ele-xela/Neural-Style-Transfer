@@ -59,7 +59,7 @@ def make_tuning_step(neural_net, optimizer, target_content, target_gram_matrices
 
     Args:
         neural_net (Module): custom trained CNN that will be used to compare images to perform Style Transfer optimization
-        optimizer (Optimizer): thee optimizer that is being used for the process of Style Transfer optimization
+        optimizer (Optimizer): the optimizer that is being used for the process of Style Transfer optimization
         target_content (Tensor): target content feature map
         target_gram_matrices (Tensor): gram matrtices of style feature maps
         content_weight (float): weight(importance) for the content loss
@@ -89,7 +89,7 @@ def make_tuning_step(neural_net, optimizer, target_content, target_gram_matrices
 
 def image_style_transfer(config):
     """
-    Main function to perform the task of Neurla style transfer on the given image
+    Main function to perform the task of Neural style transfer on the given image
 
     Args:
         config (dict): contains all required configuration to perform the Neural style transfer task
