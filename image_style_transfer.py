@@ -34,7 +34,7 @@ def get_loss(neural_net, optimizing_img, target_content, target_gram_matrices, c
     current_feature_maps = neural_net(optimizing_img)
 
     # calculate content loss
-    current_content = current_feature_maps[3].squeeze(axis=0)
+    current_content = current_feature_maps[4].squeeze(axis=0)
     content_loss = torch.nn.MSELoss(reduction='mean')(target_content, current_content)
 
     # calculate style loss
@@ -125,7 +125,7 @@ def image_style_transfer(config):
     utils.logger(log_file, "Generated feature maps\n\n")
     
     # saving the relevant content feature map and style gram matrices
-    target_content = content_feature_maps[3].squeeze(axis=0)
+    target_content = content_feature_maps[4].squeeze(axis=0)
     target_gram_matrices = [utils.gram_matrix(x) for x in style_feature_maps]
     
     # saving initialized optimizing image as iteration 0 of the optimization process

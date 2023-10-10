@@ -57,7 +57,7 @@ class Vgg16(torch.nn.Module):
         x = self.slice4(x)
         relu4_3 = x
 
-        # returning feature maps as numedetuple
+        # returning feature maps as namedtuple
         vgg_outputs = namedtuple("VggOutputs", self.layer_names)
         out = vgg_outputs(relu1_2, relu2_2, relu3_3, relu4_3)
         return out
@@ -129,7 +129,7 @@ class Vgg19(torch.nn.Module):
         x = self.slice6(x)
         layer5_1 = x
 
-        # returning feature maps as numedetuple
+        # returning feature maps as namedtuple
         vgg_outputs = namedtuple("VggOutputs", self.layer_names)
         out = vgg_outputs(layer1_1, layer2_1, layer3_1, layer4_1, conv4_2, layer5_1)
         return out
