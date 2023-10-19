@@ -10,6 +10,7 @@ import torch
 from torchvision import transforms, datasets
 from torch.utils.data import DataLoader, Sampler
 
+
 # known Imagnet quantities
 IMAGENET_MEAN_1 = np.array([0.485, 0.456, 0.406])
 IMAGENET_STD_1 = np.array([0.229, 0.224, 0.225])
@@ -25,7 +26,7 @@ def logger(path, text):
         path (string): log file location
         text (string): log text to write to log file
     """
-
+    
     with open(path, 'a') as f:
         f.write(text)
 
@@ -215,7 +216,7 @@ def get_header(training_config):
     header = ""
     header += f'Learning the style of {training_config["style_img_name"]} style image.\n'
     header += '*' * 80 + "\n"
-    header += f'Hyperparams: content_weight={training_config["content_weight"]}, style_weight={training_config["style_weight"]} and tv_weight={training_config["tv_weight"]} \n'
+    header += f'Hyperparams: content_weight={training_config["content_weight"]},style_weight={training_config["style_weight"]} and tv_weight={training_config["tv_weight"]} \n'
     header += '*' * 80 + "\n"
 
     if training_config["console_log_freq"]:

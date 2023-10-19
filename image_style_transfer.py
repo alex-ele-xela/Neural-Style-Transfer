@@ -119,7 +119,8 @@ def image_style_transfer(config):
     else:
         neural_net = vgg_nets.Vgg16().eval()
 
-    # passing the content and style image through the neural net and saving the feature maps
+    # passing the content and style image through 
+    # the neural net and saving the feature maps
     content_feature_maps = neural_net(content_img)
     style_feature_maps = neural_net(style_img)
     utils.logger(log_file, "Generated feature maps\n\n")
