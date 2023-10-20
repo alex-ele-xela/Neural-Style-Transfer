@@ -120,24 +120,29 @@
                     <h6 class="section-subtitle mb-4">The following explains the Style Transfer procedure using the VGG19 CNN</h6>
                     <p >A pre-trained VGG19 CNN is divided into 6 slices and the output feature maps from each slice is taken as the network output. 
                         The content image is passed through this custom VGG19 and the 5th feature map is taken as the content target. 
-                        Then, the style image is also passed through this custom VGG19 and the Gram matrices for each set of feature maps is calculated and treated as the taret gram matrices.</p>
-                    <img src="assets/imgs/optimizing.png" alt="Optimization process" class="w-100 mt-3 shadow-sm">
-                </div>
-                <div class="col-md-6 pl-md-4">
-                    <div class="row">
+                        Then, the style image is also passed through this custom VGG19 and the Gram matrices for each set of feature maps is 
+                        calculated and treated as the taret gram matrices.</p>
+                    
+                    <div class="row mb-3">
                         <div class="col-6">
                             <img src="assets/imgs/vgg19_pass.png" alt="Passing through VGG19" class="w-100 shadow-sm">
                         </div>
                         <div class="col-6">
                             <img src="assets/imgs/content_style.png" alt="Content and Style Extraction" class="w-100 shadow-sm">
                         </div>
+                    </div>
+                    
+                    <p>Once the target content feature maps and target style gram matrices have been calculated, 
+                        we initialize an optimizing image (either same as the content image, or random noise) 
+                        which will be optimized to acquire the target content and style.</p>
+                    <p><b>At every step, this optimizing image is passed through the custom CNN and the difference between 
+                        its content feature map & style gram matrices and the target content & style is calculated as a weighted loss.  </b><br>
+                    </p>
+                </div>
+                <div class="col-md-6 pl-md-4">
+                    <div class="row">
+                        <img src="assets/imgs/optimizing.png" alt="Optimization process" class="w-100 mt-5 shadow-sm">
                         <div class="col-12 mt-4">
-                            <p>Once the target content feature maps and target style gram matrices have been calculated, 
-                                we initialize an optimizing image (either same as the content image, or random noise) 
-                                which will be optimized to acquire the target content and style.</p>
-                            <p><b>At every step, this optimizing image is passed through the custom CNN and the difference between 
-                                its content feature map & style gram matrices and the target content & style is calculated as a weighted loss.  </b><br>
-                            </p>
                             <p>Once the loss is calculated, we backpropagate it through the network to the image pixel values themselves. 
                                 Then, we change the values of the pixels in the image itself in order to minimize the loss that we have calculated.</p>
                             <p>This optimization process can be carried out through some standard optimization techniques like Adam or LBFGS. 
