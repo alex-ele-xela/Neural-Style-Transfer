@@ -38,6 +38,9 @@
                         <a class="nav-link" href="#code">Check the code</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#ref">References</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
                     </li>
                 </ul>
@@ -114,8 +117,10 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 pr-md-4 mb-4 mb-md-0">
                     <h6 class="section-title mb-0">Our Implementation</h6>
-                    <h6 class="section-subtitle mb-4">Architecto provident deserunt</h6>
-                    <p >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate molestiae temporibus et tenetur unde quasi, cum nemo quo, molestias architecto alias voluptatibus corrupti corporis earum. Necessitatibus maxime modi ipsam, quod!</p>
+                    <h6 class="section-subtitle mb-4">The following explains the Style Transfer procedure using the VGG19 CNN</h6>
+                    <p >A pre-trained VGG19 CNN is divided into 6 slices and the output feature maps from each slice is taken as the network output. 
+                        The content image is passed through this custom VGG19 and the 5th feature map is taken as the content target. 
+                        Then, the style image is also passed through this custom VGG19 and the Gram matrices for each set of feature maps is calculated and treated as the taret gram matrices.</p>
                     <img src="assets/imgs/optimizing.png" alt="Optimization process" class="w-100 mt-3 shadow-sm">
                 </div>
                 <div class="col-md-6 pl-md-4">
@@ -127,10 +132,17 @@
                             <img src="assets/imgs/content_style.png" alt="Content and Style Extraction" class="w-100 shadow-sm">
                         </div>
                         <div class="col-12 mt-4">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo iusto quidem laborum atque, sapiente ipsa excepturi fuga cum sed in assumenda eos quasi harum culpa laboriosam nulla, incidunt quae. Voluptatum.</p>
-                            <p><b>Aliquid fuga sunt velit, temporibus molestias ab. Ipsa nesciunt totam, aliquid dignissimos.</b><br>
+                            <p>Once the target content feature maps and target style gram matrices have been calculated, 
+                                we initialize an optimizing image (either same as the content image, or random noise) 
+                                which will be optimized to acquire the target content and style.</p>
+                            <p><b>At every step, this optimizing image is passed through the custom CNN and the difference between 
+                                its content feature map & style gram matrices and the target content & style is calculated as a weighted loss.  </b><br>
                             </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt ut a dolorem, consectetur, eos suscipit consequatur magnam est dolore obcaecati adipisci expedita, vero, iste ducimus qui numquam animi facilis officia?</p>
+                            <p>Once the loss is calculated, we backpropagate it through the network to the image pixel values themselves. 
+                                Then, we change the values of the pixels in the image itself in order to minimize the loss that we have calculated.</p>
+                            <p>This optimization process can be carried out through some standard optimization techniques like Adam or LBFGS. 
+                                At each iteration of the optimization procedure, we change the values of the pixels in the optimizing image and the proces 
+                                is repeated for a certain number of epochs or until we reach a certain optimal value for the loss function.</p>
                         </div>
                     </div>
                 </div>
@@ -310,7 +322,7 @@
                             <a class="img-popup" href="assets/imgs/mosaic.jpg"></a>
                             <div class="text-holder">
                                 <h6 class="title">STYLE</h6>
-                                <p class="subtitle"> A Image of Mosaice Pattern From which Style is Extracted</p>
+                                <p class="subtitle"> A Image of Mosaic Pattern From which Style is Extracted</p>
                             </div>
                         </div>
                     </div>                                                     
@@ -472,6 +484,99 @@
         </div>
     </section>
     <!-- End of Code Section -->
+
+    <!-- References Section -->
+    <section id="ref" class="section portfolio-section">
+        <div class="container">
+            <h6 class="section-title text-center mb-0">References</h6>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[I]</p>
+                </div>
+                <div class="col-11">
+                    <p>Gatys, L. A., Ecker, A., & Bethge, M. (2015). A neural algorithm of artistic style. arXiv
+                        (Cornell University). <a href="https://arxiv.org/abs/1508.06576">https://arxiv.org/abs/1508.06576</a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[II]</p>
+                </div>
+                <div class="col-11">
+                    <p>Li, Y., Wang, N., Liu, J., & Hou, X. (2017). Demystifying neural style transfer. arXiv
+                        (Cornell University). <a href="https://arxiv.org/abs/1701.01036">https://arxiv.org/abs/1701.01036</a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[III]</p>
+                </div>
+                <div class="col-11">
+                    <p>Johnson, J., Alahi, A., & Li, F. (2016). Perceptual losses for Real-Time style transfer and
+                        Super-Resolution. In Lecture Notes in Computer Science (pp. 694-711).
+                        <a href="https://arxiv.org/abs/1603.08155">https://arxiv.org/abs/1603.08155</a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[IV]</p>
+                </div>
+                <div class="col-11">
+                    <p>Krizhevsky, A., Sutskever, I., & Hinton, G. E. (2012). ImageNet Classification with Deep
+                        Convolutional Neural Networks. Neural Information Processing Systems, 25, 1097–1105.
+                        <a href="https://doi.org/10.1145/3065386">https://doi.org/10.1145/3065386</a></a></a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[V]</p>
+                </div>
+                <div class="col-11">
+                    <p>Simonyan, K., & Zisserman, A. (2014). Very deep convolutional networks for
+                        Large-Scale image recognition. Computer Vision and Pattern Recognition.
+                        <a href="https://arxiv.org/abs/1409.1556">https://arxiv.org/abs/1409.1556</a></a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[VI]</p>
+                </div>
+                <div class="col-11">
+                    <p>Jing, Y., Yang, Y., Feng, Z., Ye, J., Yu, Y., & Song, M. (2020). Neural Style Transfer: a
+                        review. IEEE Transactions on Visualization and Computer Graphics, 26(11), 3365-3385.
+                        <a href="https://doi.org/10.1109/TVCG.2019.2921336">https://doi.org/10.1109/TVCG.2019.2921336</a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[VII]</p>
+                </div>
+                <div class="col-11">
+                    <p>Image Stylization: History and Future (Part 1). (n.d.). Adobe Research.
+                        <a href="https://research.adobe.com/news/image-stylization-history-and-future/">https://research.adobe.com/news/image-stylization-history-and-future/</a></p>
+                </div>
+            </div>
+
+            <div class="row align-items-center my-2">
+                <div class="col-1">
+                    <p>[VIII]</p>
+                </div>
+                <div class="col-11">
+                    <p>Style Transfer Guide - Fritz ai. (2023, July 14). Fritz Ai. 
+                        <a href="https://fritz.ai/style-transfer/">https://fritz.ai/style-transfer/</a></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End of References section -->
 
     <!-- Contact Section -->
     <section id="contact" class="section has-img-bg pb-0">
